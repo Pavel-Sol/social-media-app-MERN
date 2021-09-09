@@ -1,17 +1,25 @@
 const router = require('express').Router();
-const User = require('../models/UserModel');
+const {
+  updateUser,
+  deleteUser,
+  getOneUser,
+  followUser,
+  unfollowUser,
+} = require('./../controllers/user.controllers');
 
-//update user
-// router.put('/:id', async (req, res) => {
-//   if (req.params.id === req.body.userId || req.body.isAdmin) {
-//   } else {
-//     return res.status(403).json('You can update only your account!');
-//   }
-// });
+// update user
+router.put('/:id', updateUser);
 
 //delete user
+router.delete('/:id', deleteUser);
+
 //get a user
+router.get('/:id', getOneUser);
+
 //follow a user
+router.put('/:id/follow', followUser);
+
 //unfollow a user
+router.put('/:id/unfollow', unfollowUser);
 
 module.exports = router;
