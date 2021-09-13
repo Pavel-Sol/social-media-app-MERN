@@ -12,7 +12,7 @@ module.exports.updateUser = async (req, res) => {
 
         console.log('work', req.body.password);
       } catch (error) {
-        console.log(error.message);
+        // console.log(error.message);
         return res.status(500).json(error.message);
       }
     }
@@ -50,6 +50,7 @@ module.exports.deleteUser = async (req, res) => {
 module.exports.getOneUser = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
+
     const { password, updatedAt, ...other } = user._doc;
 
     res.json(other);

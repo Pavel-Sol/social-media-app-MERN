@@ -4,7 +4,8 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
 const helmet = require('helmet');
-const userRoute = require('./routes/usersRoute');
+const userRoute = require('./routes/userRoute');
+const postRoute = require('./routes/postRoute');
 const authRoute = require('./routes/authRoute');
 
 dotenv.config();
@@ -16,6 +17,7 @@ app.use(morgan('common'));
 
 app.use('/api/auth', authRoute);
 app.use('/api/users', userRoute);
+app.use('/api/posts', postRoute);
 // --------------------------
 const start = async () => {
   try {

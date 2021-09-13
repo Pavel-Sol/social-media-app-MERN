@@ -5,7 +5,7 @@ const {
   getOneUser,
   followUser,
   unfollowUser,
-} = require('./../controllers/user.controllers');
+} = require('../controllers/user.controllers');
 
 // update user
 router.put('/:id', updateUser);
