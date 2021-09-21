@@ -6,8 +6,10 @@ import { useState } from 'react';
 const Post = ({ post }) => {
   const [like, setLike] = useState(post.like);
   const [isLiked, setIsLiked] = useState(false);
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
-  // console.log(post);
+  // console.log(PF + post.photo);
+  // console.log(PF + Users.filter((u) => u.id === post?.userId)[0].profilePicture);
 
   const likeHandler = () => {
     setLike(isLiked ? like - 1 : like + 1);
@@ -34,11 +36,11 @@ const Post = ({ post }) => {
         </div>
         <div className="postCenter">
           <span className="postText">{post?.desc}</span>
-          <img className="postImg" src={post.photo} alt="" />
+          <img className="postImg" src={PF + post.photo} alt="" />
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">
-            <img className="likeIcon" src="assets/like.png" onClick={likeHandler} alt="" />
+            <img className="likeIcon" src={`${PF}assets/like.png`} onClick={likeHandler} alt="" />
             <span className="postLikeCounter">{like} people like it</span>
           </div>
           <div className="postBottomRight">
