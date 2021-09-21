@@ -7,10 +7,6 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
 function App() {
   const user = true;
-  // return <Home />;
-  // return <Profile />;
-  // return <Register />;
-  // return <Login />;
 
   return (
     <BrowserRouter>

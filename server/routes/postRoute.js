@@ -24,6 +24,6 @@ router.put('/:id/like', likePost);
 router.get('/:id', getOnePost);
 
 //get timeline posts
-router.get('/timeline/all', getTimlinePosts);
+router.get('/timeline/:userId', getTimlinePosts);
 
 module.exports = router;
