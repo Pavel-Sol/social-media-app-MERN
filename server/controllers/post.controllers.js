@@ -80,3 +80,14 @@ module.exports.getTimlinePosts = async (req, res) => {
     res.status(500).json(err);
   }
 };
+
+module.exports.getUserAllPosts = async (req, res) => {
+  try {
+    const user = await User.findOne({ username: req.params.username });
+    const userPosts = await Post.find({ userId: user._id });
+    // console.log('userPosrs ', userPosts);
+    res.json(userPosts);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};

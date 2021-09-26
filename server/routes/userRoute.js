@@ -14,7 +14,7 @@ router.put('/:id', updateUser);
 router.delete('/:id', deleteUser);
 
 //get a user
-router.get('/:id', getOneUser);
+router.get('/', getOneUser);
 
 //follow a user
 router.put('/:id/follow', followUser);

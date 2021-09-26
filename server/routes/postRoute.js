@@ -6,6 +6,7 @@ const {
   likePost,
   getOnePost,
   getTimlinePosts,
+  getUserAllPosts,
 } = require('../controllers/post.controllers');
 
 //create a post
@@ -25,5 +26,8 @@ router.get('/:id', getOnePost);
 
 //get timeline posts
 router.get('/timeline/:userId', getTimlinePosts);
+
+//get user's all posts
+router.get('/profile/:username', getUserAllPosts);
 
 module.exports = router;
