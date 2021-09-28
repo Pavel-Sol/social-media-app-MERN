@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom'
 import axios from 'axios';
 
 import "./profile.css";
@@ -10,15 +11,18 @@ import Rightbar from "../../components/rightbar/Rightbar";
 const Profile = () => {
   const [user, setUser] = useState({});
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+  const {username} = useParams()
+
+  
 
   useEffect(() => {
     const fetchUser = async () => {
-      const res = await axios.get(`/users?username=jhon`);
+      const res = await axios.get(`/users?username=${username}`);
       // console.log(res.data)
       setUser(res.data);
     };
     fetchUser();
-  }, []);
+  }, [username]);
 
 
   return (

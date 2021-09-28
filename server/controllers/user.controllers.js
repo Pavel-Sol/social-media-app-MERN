@@ -55,7 +55,6 @@ module.exports.getOneUser = async (req, res) => {
   // console.log('username ', username);
   try {
     const user = userId ? await User.findById(userId) : await User.findOne({ username: username });
-
     const { password, updatedAt, ...other } = user._doc;
 
     res.json(other);
