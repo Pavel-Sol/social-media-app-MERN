@@ -1,22 +1,22 @@
 import {useState} from 'react'
 import { useContext } from 'react';
+import {Link} from 'react-router-dom';
 
 import "./login.css";
 import {loginCall} from './../../apiCalls'
 import { AuthContext } from '../../context/AuthContext';
 
 const Login = () => {
-  const { isFetching, dispatch, user, error } = useContext(AuthContext);
+  const { isFetching, dispatch, error } = useContext(AuthContext);
   const [email, setEmail ] = useState('')
   const [password, setPassword ] = useState('')
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault()
     loginCall({email, password}, dispatch)
   }
-
-  console.log('isFetching ', isFetching)
-  console.log('user ', user)
-  console.log('error ', error)
+  
+  // console.log('error:----> ', error)
   return (
     <div className="login">
       <div className="loginWrapper">
@@ -28,7 +28,7 @@ const Login = () => {
         </div>
         <div className="loginRight">
           <form
-           onSubmit={(e) => e.preventDefault()}
+           onSubmit={(e) => handleSubmit(e)}
            className="loginBox">
             <input
               value={email}
@@ -41,9 +41,12 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Password" className="loginInput" />
             <button
-            onClick={handleSubmit}
-            type="submit" className="loginButton">Войти</button>
-            <span className="RegisterLink">Зарегистрироваться</span>
+            disabled={isFetching}
+            type="submit" className="loginButton">{isFetching ? 'Загрузка...' :'Войти'}</button>
+            <Link to='/register'
+               className='RegisterLink'>
+              <span className="RegisterLink">Зарегистрироваться</span>
+            </Link>
           </form>
         </div>
       </div>

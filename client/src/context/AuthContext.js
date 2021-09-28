@@ -4,7 +4,7 @@ import { useReducer } from 'react';
 import { AuthReducer } from './AuthReducer';
 
 const INITALSTATE = {
-  user: {},
+  user: null,
   isFetching: false,
   error: false,
 };

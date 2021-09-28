@@ -65,7 +65,11 @@
   cursor: pointer;
 }
 
+.loginButton:disabled {
+  cursor: not-allowed;
+}
 .RegisterLink {
   text-align: center;
   color: #1775ee;
+  text-decoration: none;
 }

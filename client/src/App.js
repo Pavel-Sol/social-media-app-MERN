@@ -2,11 +2,14 @@ import Home from './pages/home/Home';
 import Profile from './pages/profile/Profile';
 import Register from './pages/register/Register';
 import Login from './pages/login/Login';
+import { AuthContext } from './context/AuthContext';
 
+import { useContext } from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
 function App() {
-  const user = false;
+  const { user } = useContext(AuthContext);
+  // console.log(user);
 
   return (
     <BrowserRouter>
