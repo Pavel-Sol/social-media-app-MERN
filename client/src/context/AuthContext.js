@@ -9,7 +9,7 @@ const INITALSTATE = {
   error: false,
 };
 
-const AuthContext = createContext(INITALSTATE);
+export const AuthContext = createContext(INITALSTATE);
 
 export const AuthContextProvider = (props) => {
   const [state, dispatch] = useReducer(AuthReducer, INITALSTATE);

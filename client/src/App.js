@@ -6,7 +6,7 @@ import Login from './pages/login/Login';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
 function App() {
-  const user = true;
+  const user = false;
 
   return (
     <BrowserRouter>
