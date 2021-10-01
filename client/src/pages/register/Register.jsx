@@ -16,7 +16,7 @@ const Register = () => {
     const newUser = {username, email, password}
 
     try {
-     const res =  await axios.post("/auth/register", newUser);
+     await axios.post("/auth/register", newUser);
      history.push("/login");
     } catch (error) {
       console.log('error => ', error);
