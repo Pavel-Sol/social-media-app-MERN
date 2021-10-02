@@ -14,6 +14,8 @@ const Post = ({ post }) => {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const { user: currentUser } = useContext(AuthContext);
 
+  // console.log(PF + post.img);
+
   const likeHandler = () => {
     try {
       axios.put('/posts/' + post._id + '/like', { userId: currentUser._id });
