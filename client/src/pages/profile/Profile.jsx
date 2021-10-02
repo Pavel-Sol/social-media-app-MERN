@@ -7,6 +7,7 @@ import Topbar from "../../components/topbar/Topbar";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Feed from "../../components/feed/Feed";
 import Rightbar from "../../components/rightbar/Rightbar";
+const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
 const Profile = () => {
   const [user, setUser] = useState({});
@@ -35,12 +36,12 @@ const Profile = () => {
             <div className="profileCover">
               <img
                 className="profileCoverImg"
-                src={user.coverPicture || `${PF}assets/noCover.jpg`}
+                src={user.coverPicture ? PF + user.coverPicture : `${PF}assets/noCover.jpg`}
                 alt=""
               />
               <img
                 className="profileUserImg"
-                src={user.profilePicture || `${PF}assets/noAvatar.jpg`}
+                src={user.profilePicture ? PF + user.profilePicture : `${PF}assets/noAvatar.jpg`}
                 alt=""
               />
             </div>
@@ -50,7 +51,7 @@ const Profile = () => {
             </div>
           </div>
           <div className="profileRightBottom">
-            <Feed username='jhon' />
+            <Feed username={username} />
             <Rightbar user={user}/>
           </div>
         </div>
