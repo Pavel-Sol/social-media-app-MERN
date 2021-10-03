@@ -31,7 +31,7 @@ useEffect(() => {
    return (
       <div className="feed">
         <div className="feedWrapper">
-          {user.username === username && <Share />}
+          {(!username || username === user.username) && <Share />}
           {posts.map((p) => (
             <Post key={p._id} post={p} />
           ))}
