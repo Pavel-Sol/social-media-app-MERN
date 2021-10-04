@@ -19,18 +19,15 @@ const Rightbar = ({ user }) => {
     setFollowed(currentUser.followings.includes(user?._id))
   },[user, currentUser.followings])
 
-  // console.log('currentUser followings', currentUser?.followings)
-  // console.log('user-id ', user?._id)
-  // console.log('currentUser foll? ',  currentUser.followings.includes(user?._id))
-  // console.log('followed ', followed)
-
   useEffect(() => {
     const getFriends = async () => {
       try {
-        const friendList = await axios.get("/users/friends/" + user._id);
-        setFriends(friendList.data);
+        if(user?._id) {
+          const friendList = await axios.get("/users/friends/" + user._id);
+          setFriends(friendList.data);
+        }
       } catch (err) {
-        console.log(err);
+        console.log(err.message);
       }
     };
     getFriends()
