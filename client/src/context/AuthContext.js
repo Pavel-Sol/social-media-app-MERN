@@ -4,7 +4,13 @@ import { useReducer } from 'react';
 import { AuthReducer } from './AuthReducer';
 
 const INITALSTATE = {
-  user: null,
+  user: {
+    email: 'test444@mail.ru',
+    _id: '613b86980dd8c819080d912a',
+    username: 'jhon',
+    followers: [],
+    followings: [],
+  },
   isFetching: false,
   error: false,
 };
