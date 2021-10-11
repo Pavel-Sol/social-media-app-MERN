@@ -7,6 +7,8 @@ const helmet = require('helmet');
 const userRoute = require('./routes/userRoute');
 const postRoute = require('./routes/postRoute');
 const authRoute = require('./routes/authRoute');
+const conversationRoute = require('./routes/conversationRoute');
+const messageRoute = require('./routes/messageRoute');
 const multer = require('multer');
 const path = require('path');
 
@@ -39,6 +41,8 @@ app.post('/api/upload', upload.single('file'), (req, res) => {
 app.use('/api/auth', authRoute);
 app.use('/api/users', userRoute);
 app.use('/api/posts', postRoute);
+app.use('/api/conversations', conversationRoute);
+app.use('/api/messages', messageRoute);
 // --------------------------
 const start = async () => {
   try {
