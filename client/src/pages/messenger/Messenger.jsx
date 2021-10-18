@@ -12,6 +12,7 @@ const Messenger = () => {
    const [conversations, setConversations] = useState([])
    const [currentChat, setCurrentChat] = useState(null)
    const [messages, setMessages] = useState([])
+   const [newMessage, setNewMessage] = useState('')
    const {user} = useContext(AuthContext)
 
    useEffect(() => {
@@ -31,13 +32,29 @@ const Messenger = () => {
          try {
             const result = await axios.get(`/messages/${currentChat?._id}`)
             setMessages(result.data)
-            console.log(result.data)
+            // console.log(result.data)
          } catch (error) {
             console.log(error)
          }
       }
       getMessages()
    },[currentChat])
+
+   const handleSubmit = async () => {
+      const message = {
+         text: newMessage,
+         sender: user._id,
+         conversationId: currentChat._id
+      }
+
+      try {
+         const res = await axios.post("/messages", message);
+         setMessages([...messages, res.data]);
+         setNewMessage("");
+      } catch (error) {
+         console.log(error)
+      }
+   }
 
    return (
       <>
@@ -71,10 +88,14 @@ const Messenger = () => {
                      </div>
                      <div className="chatBoxBottom">
                         <textarea
+                           value={newMessage}
+                           onChange={(e) => setNewMessage(e.target.value)}
                            className="chatMessageInput"
                            placeholder="напишите сообщение..."
                         ></textarea>
-                        <button className="chatSubmitButton">
+                        <button 
+                           className="chatSubmitButton"
+                           onClick={handleSubmit}>
                               Отправить
                         </button>
                      </div>
