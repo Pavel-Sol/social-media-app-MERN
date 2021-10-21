@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState, useRef} from 'react';
 import axios from 'axios'
 
 import "./messenger.css";
@@ -14,6 +14,8 @@ const Messenger = () => {
    const [messages, setMessages] = useState([])
    const [newMessage, setNewMessage] = useState('')
    const {user} = useContext(AuthContext)
+   const scrollRef = useRef();
+
 
    useEffect(() => {
       const getConversations = async() => {
@@ -32,13 +34,16 @@ const Messenger = () => {
          try {
             const result = await axios.get(`/messages/${currentChat?._id}`)
             setMessages(result.data)
-            // console.log(result.data)
          } catch (error) {
             console.log(error)
          }
       }
       getMessages()
    },[currentChat])
+
+   useEffect(() => {
+      scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, [messages]);
 
    const handleSubmit = async () => {
       const message = {
@@ -81,7 +86,9 @@ const Messenger = () => {
                         {
                            messages.length > 0
                            ? messages.map((m) => {
-                              return <Message message={m} key={m._id} own={m.sender === user._id}/>
+                              return <div key={m._id} ref={scrollRef}>
+                                 <Message message={m} own={m.sender === user._id}/>
+                              </div>
                            })
                            : <div>нет сообщений</div>
                         }
