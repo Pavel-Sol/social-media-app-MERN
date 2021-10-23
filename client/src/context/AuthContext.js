@@ -19,6 +19,7 @@ const INITALSTATE = {
     __v: 0,
     desc: 'ку ку ёпта',
   },
+  // user: null,
   isFetching: false,
   error: false,
 };

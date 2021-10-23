@@ -7,12 +7,13 @@ import Conversation from './../../components/conversation/Conversation'
 import Message from './../../components/message/Message'
 import ChatOnline from './../../components/chatOnline/ChatOnline'
 import { AuthContext } from './../../context/AuthContext'
+import {useInput} from './../../hooks/useInput'
 
 const Messenger = () => {
    const [conversations, setConversations] = useState([])
    const [currentChat, setCurrentChat] = useState(null)
    const [messages, setMessages] = useState([])
-   const [newMessage, setNewMessage] = useState('')
+   const newMessage = useInput('')
    const {user} = useContext(AuthContext)
    const scrollRef = useRef();
 
@@ -47,7 +48,7 @@ const Messenger = () => {
 
    const handleSubmit = async () => {
       const message = {
-         text: newMessage,
+         text: newMessage.value,
          sender: user._id,
          conversationId: currentChat._id
       }
@@ -55,7 +56,7 @@ const Messenger = () => {
       try {
          const res = await axios.post("/messages", message);
          setMessages([...messages, res.data]);
-         setNewMessage("");
+         newMessage.reset()
       } catch (error) {
          console.log(error)
       }
@@ -95,8 +96,8 @@ const Messenger = () => {
                      </div>
                      <div className="chatBoxBottom">
                         <textarea
-                           value={newMessage}
-                           onChange={(e) => setNewMessage(e.target.value)}
+                           value={newMessage.value}
+                           onChange={newMessage.onChange}
                            className="chatMessageInput"
                            placeholder="напишите сообщение..."
                         ></textarea>

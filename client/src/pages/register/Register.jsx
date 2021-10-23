@@ -1,19 +1,18 @@
 import axios from 'axios';
-import {useState} from 'react'
 import { useHistory } from 'react-router';
-
+import {useInput} from './../../hooks/useInput'
 
 import "./register.css";
 
 const Register = () => {
-  const [username, setUsername ] = useState('')
-  const [email, setEmail ] = useState('')
-  const [password, setPassword ] = useState('')
+  const email = useInput('')
+  const password = useInput('')
+  const username = useInput('')
   const history = useHistory();
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const newUser = {username, email, password}
+    const newUser = {username: username.value, email: email.value, password: password.value}
 
     try {
      await axios.post("/auth/register", newUser);
@@ -36,18 +35,18 @@ const Register = () => {
           <form className="loginBox" 
             onSubmit={(e) => handleSubmit(e)}>
             <input 
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              value={username.value}
+              onChange={username.onChange}
               placeholder="Username" className="loginInput" />
             <input
-              value={email} 
-              onChange={(e) => setEmail(e.target.value)}
+              value={email.value} 
+              onChange={email.onChange}
               type="email"
               placeholder="Email" 
               className="loginInput" />
             <input
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={password.value}
+              onChange={password.onChange}
               placeholder="Password" className="loginInput" />
             <button type='submit' className="loginButton">Зарегистрироваться</button>
           </form>

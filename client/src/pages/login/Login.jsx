@@ -1,19 +1,19 @@
-import {useState} from 'react'
 import { useContext } from 'react';
 import {Link} from 'react-router-dom';
 
 import "./login.css";
 import {loginCall} from './../../apiCalls'
 import { AuthContext } from '../../context/AuthContext';
+import { useInput } from '../../hooks/useInput';
 
 const Login = () => {
-  const { isFetching, dispatch, error } = useContext(AuthContext);
-  const [email, setEmail ] = useState('')
-  const [password, setPassword ] = useState('')
+  const { isFetching, dispatch} = useContext(AuthContext);
+  const email = useInput('')
+  const password = useInput('')
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    loginCall({email, password}, dispatch)
+    loginCall({email: email.value, password: password.value}, dispatch)
   }
   
   // console.log('error:----> ', error)
@@ -31,14 +31,14 @@ const Login = () => {
            onSubmit={(e) => handleSubmit(e)}
            className="loginBox">
             <input
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={email.value}
+              onChange={email.onChange}
               type="email"
               placeholder="Email" 
               className="loginInput" />
             <input
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={password.value}
+              onChange={password.onChange}
               placeholder="Password" className="loginInput" />
             <button
             disabled={isFetching}
