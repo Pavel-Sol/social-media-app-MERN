@@ -1,8 +1,10 @@
 import "./message.css";
 import { format } from "timeago.js";
+import React from "react";
 
 
-const Message = ({own, message}) => {
+const Message = React.memo(
+   ({own, message}) => {
     
       return (
          <div className={own ? "message own" : "message"}>
@@ -14,4 +16,5 @@ const Message = ({own, message}) => {
          </div>
       )
    }
+)
 export default Message
